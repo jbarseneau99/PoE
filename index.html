@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Principles of Expansion · Brant Arseneau · Harvard, November 2026</title>
+<meta name="description" content="Slides from Brant Arseneau's talk Principles of Expansion, Harvard, November 2026.">
+<style>
+  html,body{margin:0;background:#0A0D16;color:#EEEAE2;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  header{max-width:1200px;margin:0 auto;padding:28px 20px 8px}
+  h1{font-family:Newsreader,Georgia,serif;font-weight:300;font-size:2rem;margin:0}
+  .sub{color:#96A0B6;margin-top:6px}
+  main{max-width:1200px;margin:0 auto;padding:12px 20px 40px}
+  .stage{position:relative;width:100%;aspect-ratio:16/9;background:#141A2B}
+  .stage img{width:100%;height:100%;object-fit:contain;display:block}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;flex-wrap:wrap}
+  button,a.btn{background:#141A2B;color:#EEEAE2;border:1px solid #2a3350;border-radius:6px;padding:8px 16px;font-size:1rem;cursor:pointer;text-decoration:none}
+  button:hover,a.btn:hover{border-color:#D9B46A;color:#D9B46A}
+  .count{color:#C4CCDC;min-width:70px;text-align:center}
+  .all{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .all img{width:100%;display:block;cursor:pointer;border:1px solid #1d2438}
+  .all img.on{border-color:#D9B46A}
+  footer{max-width:1200px;margin:0 auto;padding:0 20px 40px;color:#96A0B6;font-size:.9rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>Principles of Expansion</h1>
+  <div class="sub">Brant Arseneau · Mach33 · Harvard, November 2026</div>
+</header>
+<main>
+  <div class="stage"><img id="slide" src="slide-01.png" alt="Slide 1"></div>
+  <div class="bar">
+    <div><button id="prev" aria-label="Previous slide">&larr; Prev</button> <button id="next" aria-label="Next slide">Next &rarr;</button></div>
+    <div class="count" id="count">1 / 20</div>
+    <div><a class="btn" href="PoE-slides.pdf" download>Download PDF</a></div>
+  </div>
+  <div class="all" id="all"></div>
+</main>
+<footer>Use the arrow keys or click a thumbnail to move between slides.</footer>
+<script>
+  const N=20;let i=1;
+  const pad=n=>String(n).padStart(2,'0');
+  const img=document.getElementById('slide'),cnt=document.getElementById('count'),all=document.getElementById('all');
+  for(let k=1;k<=N;k++){const t=document.createElement('img');t.src='slide-'+pad(k)+'.png';t.alt='Slide '+k;t.loading='lazy';t.onclick=()=>{go(k);window.scrollTo({top:0,behavior:'smooth'})};all.appendChild(t);}
+  function go(k){i=Math.min(N,Math.max(1,k));img.src='slide-'+pad(i)+'.png';img.alt='Slide '+i;cnt.textContent=i+' / '+N;[...all.children].forEach((t,j)=>t.classList.toggle('on',j+1===i));history.replaceState(null,'','#'+i);}
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(i+1)}if(e.key==='ArrowLeft'){go(i-1)}});
+  const h=parseInt(location.hash.slice(1));go(isNaN(h)?1:h);
+</script>
+</body>
+</html>
