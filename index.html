@@ -32,14 +32,14 @@
   <div class="stage"><img id="slide" src="slide-01.png" alt="Slide 1"></div>
   <div class="bar">
     <div><button id="prev" aria-label="Previous slide">&larr; Prev</button> <button id="next" aria-label="Next slide">Next &rarr;</button></div>
-    <div class="count" id="count">1 / 20</div>
+    <div class="count" id="count">1 / 21</div>
     <div><a class="btn" href="PoE-slides.pdf" download>Download PDF</a></div>
   </div>
   <div class="all" id="all"></div>
 </main>
 <footer>Use the arrow keys or click a thumbnail to move between slides.</footer>
 <script>
-  const N=20;let i=1;
+  const N=21;let i=1;
   const pad=n=>String(n).padStart(2,'0');
   const img=document.getElementById('slide'),cnt=document.getElementById('count'),all=document.getElementById('all');
   for(let k=1;k<=N;k++){const t=document.createElement('img');t.src='slide-'+pad(k)+'.png';t.alt='Slide '+k;t.loading='lazy';t.onclick=()=>{go(k);window.scrollTo({top:0,behavior:'smooth'})};all.appendChild(t);}
